@@ -8,6 +8,6 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(CounterInitial()) {
     var state1 = state as CounterInitial;
     on<Increment1>(
-        (event, emit) => emit(CounterInitial(count: state1.count + 1)));
+        (event, emit) => emit(CounterInitial(count: event.num+1)));
   }
 }

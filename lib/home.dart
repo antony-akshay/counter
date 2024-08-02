@@ -7,6 +7,8 @@ class Homescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+      int count=0;
     return Scaffold(
       body: SafeArea(
           child: Center(
@@ -14,14 +16,20 @@ class Homescreen extends StatelessWidget {
           children: [
             BlocBuilder<CounterBloc, CounterState>(
               builder: (context, state) {
-                return Text('${state.count}');
+               
+                if (state is CounterInitial) {
+                  count = state.count;
+                  return Text(state.count.toString(),style: TextStyle(fontSize: 40),);
+                }
+                return  Text(count.toString());
+               
               },
             ),
             TextButton(
                 onPressed: () {
-                  BlocProvider.of<CounterBloc>(context).add(Increment1());
+                  BlocProvider.of<CounterBloc>(context).add(Increment1(num: count));
                 },
-                child: Text('1+'))
+                child: const Text('1+',style: TextStyle(fontSize: 40),))
           ],
         ),
       )),
